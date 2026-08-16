@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import terrain from "@/assets/hunza-terrain.jpg";
 import { journeyStops, mountainLabels } from "@/data/journey";
 import { DestinationMarker } from "./DestinationMarker";
@@ -13,25 +13,14 @@ import { StartJourneyButton } from "./StartJourneyButton";
 
 export function JourneyWorld() {
   const [started, setStarted] = useState(false);
-  const [playing, setPlaying] = useState(false);
   const [exploring, setExploring] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [elapsed, setElapsed] = useState(0);
   const [zoom, setZoom] = useState(1);
 
   const active = journeyStops[activeIndex] ?? journeyStops[0]!;
 
-  useEffect(() => {
-    if (!playing) return;
-    const t = setInterval(() => {
-      setElapsed((e) => (e >= active.durationSec ? active.durationSec : e + 1));
-    }, 1000);
-    return () => clearInterval(t);
-  }, [playing, active.durationSec]);
-
   const select = (i: number) => {
     setActiveIndex(i);
-    setElapsed(0);
     setStarted(true);
   };
 
@@ -92,36 +81,26 @@ export function JourneyWorld() {
         <>
           <JourneyPlayer
             stop={active}
-            elapsed={elapsed}
-            playing={playing}
+            index={activeIndex}
+            total={journeyStops.length}
             thumbnail={terrain}
-            onTogglePlay={() => setPlaying((p) => !p)}
             onPrev={() => select(Math.max(0, activeIndex - 1))}
             onNext={() => select(Math.min(journeyStops.length - 1, activeIndex + 1))}
           />
           <JourneyControls
-            playing={playing}
             exploring={exploring}
-            onTogglePlay={() => setPlaying((p) => !p)}
             onRestart={() => {
               setActiveIndex(0);
-              setElapsed(0);
-              setPlaying(true);
               setExploring(false);
             }}
-            onExplore={() => {
-              setExploring((e) => !e);
-              setPlaying(false);
-            }}
+            onExplore={() => setExploring((e) => !e)}
           />
         </>
       ) : (
         <StartJourneyButton
           onStart={() => {
             setStarted(true);
-            setPlaying(true);
             setActiveIndex(0);
-            setElapsed(0);
           }}
         />
       )}

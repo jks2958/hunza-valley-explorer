@@ -37,9 +37,9 @@ export function JourneyWorld() {
 
   // camera framing: pan the world toward the active stop
   const camera = useMemo(() => {
-    const scale = exploring ? zoom : zoom * 1.18;
-    const dx = (50 - active.x) * (scale - 1) * 0.9;
-    const dy = (50 - active.y) * (scale - 1) * 0.9;
+    const scale = exploring ? zoom : zoom * 1.06;
+    const dx = (50 - active.x) * (scale - 1) * 0.5;
+    const dy = (50 - active.y) * (scale - 1) * 0.5;
     return { scale, dx: exploring ? 0 : dx, dy: exploring ? 0 : dy };
   }, [active.x, active.y, zoom, exploring]);
 
@@ -64,7 +64,7 @@ export function JourneyWorld() {
         {mountainLabels.map((m) => (
           <MountainLabel key={m.id} {...m} />
         ))}
-        <MountainLabel name="Passu Cones" x={24} y={18} />
+        <MountainLabel name="Passu Cones" x={30} y={16} />
         {journeyStops.map((stop, i) => (
           <DestinationMarker
             key={stop.id}

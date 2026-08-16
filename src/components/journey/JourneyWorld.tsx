@@ -19,7 +19,7 @@ export function JourneyWorld() {
   const [elapsed, setElapsed] = useState(0);
   const [zoom, setZoom] = useState(1);
 
-  const active = journeyStops[activeIndex];
+  const active = journeyStops[activeIndex] ?? journeyStops[0]!;
 
   useEffect(() => {
     if (!playing) return;

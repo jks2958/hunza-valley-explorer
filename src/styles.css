@@ -132,6 +132,86 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* ---- NorthVerse 3D Journey design tokens ---- */
+:root {
+  --nv-void: oklch(0.16 0.03 260);
+  --nv-ui: oklch(0.99 0 0);
+  --nv-ui-dim: oklch(0.78 0.015 260);
+  --nv-accent: oklch(0.58 0.2 262);
+  --nv-accent-glow: oklch(0.58 0.2 262 / 45%);
+  --nv-glass: oklch(0.18 0.03 262 / 62%);
+  --nv-glass-bright: oklch(0.24 0.035 262 / 72%);
+  --nv-glass-strong: oklch(1 0 0 / 16%);
+  --nv-glass-hover: oklch(1 0 0 / 10%);
+  --nv-line: oklch(1 0 0 / 14%);
+  --nv-route: oklch(0.95 0.02 262 / 55%);
+  --nv-route-active: oklch(0.72 0.16 250 / 90%);
+  --nv-compass-north: oklch(0.62 0.22 25);
+}
+
+@theme inline {
+  --color-nv-void: var(--nv-void);
+  --color-nv-ui: var(--nv-ui);
+  --color-nv-ui-dim: var(--nv-ui-dim);
+  --color-nv-accent: var(--nv-accent);
+  --color-nv-glass-strong: var(--nv-glass-strong);
+  --color-nv-glass-hover: var(--nv-glass-hover);
+  --color-nv-line: var(--nv-line);
+}
+
+@utility nv-glass {
+  background-color: var(--nv-glass);
+  border: 1px solid var(--nv-line);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 18px 48px -18px oklch(0 0 0 / 70%);
+}
+
+@utility nv-glass-bright {
+  background-color: var(--nv-glass-bright);
+}
+
+@utility nv-marker {
+  border-radius: 9999px;
+  background-color: var(--nv-glass);
+  border: 1px solid var(--nv-line);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 12px 30px -12px oklch(0 0 0 / 80%);
+}
+
+@utility nv-marker-active {
+  border-color: oklch(0.75 0.14 80 / 70%);
+  box-shadow:
+    0 0 26px oklch(0.75 0.14 80 / 35%),
+    0 14px 34px -12px oklch(0 0 0 / 80%);
+}
+
+@utility nv-marker-stem {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, oklch(1 0 0 / 55%), oklch(1 0 0 / 0%));
+}
+
+@utility nv-marker-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: oklch(1 0 0 / 80%);
+  box-shadow: 0 0 12px oklch(1 0 0 / 60%);
+}
+
+@utility nv-marker-dot-active {
+  background-color: oklch(0.82 0.15 80);
+  box-shadow: 0 0 18px oklch(0.82 0.15 80 / 90%);
+}
+
+@utility nv-world-vignette {
+  background:
+    radial-gradient(120% 90% at 50% 40%, transparent 40%, oklch(0.12 0.03 262 / 55%) 100%),
+    linear-gradient(to bottom, oklch(0.12 0.03 262 / 45%) 0%, transparent 28%, transparent 62%, oklch(0.1 0.03 262 / 65%) 100%);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

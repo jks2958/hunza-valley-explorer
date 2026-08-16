@@ -64,7 +64,7 @@ export function JourneyWorld() {
         {mountainLabels.map((m) => (
           <MountainLabel key={m.id} {...m} />
         ))}
-        <MountainLabel name="Passu Cones" x={30} y={16} />
+        <MountainLabel name="Passu Cones" x={45} y={15} />
         {journeyStops.map((stop, i) => (
           <DestinationMarker
             key={stop.id}
